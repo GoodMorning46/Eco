@@ -1,0 +1,10 @@
+textarea{
+    width: 100%;
+    height: 550px;
+    margin-top: 5%;
+    padding: 5%;
+    border: grey 0.5px solid;
+    resize: none;
+    border-radius: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
