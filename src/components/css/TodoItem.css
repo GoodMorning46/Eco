@@ -40,6 +40,8 @@ body {
   border-radius: 5px;
   background-color: rgba(250, 250, 250, 1);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  height: 10%;
+  font-size: 14px;
 }
 
 
@@ -56,6 +58,11 @@ body {
   margin-left: 0%;
 }
 
+.todo-card .icon {
+  font-size: 22px;
+  margin-left: 0%;
+}
+
 .text-done {
   text-decoration: line-through;
   opacity: 0.3;
@@ -65,4 +72,5 @@ body {
   font-size: 22px;
   color: #c23616;
 }
+
 
