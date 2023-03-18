@@ -9,7 +9,7 @@ function App() {
 	return(
 			<div className="container_parent">
 				<div className="header">
-					<img className='logo' src='logo1.png'></img>
+					<img className='logo' src='logo.png'></img>
 				</div>
 				<div className="container_all">
 				

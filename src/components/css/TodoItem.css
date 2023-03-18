@@ -44,23 +44,26 @@ body {
   font-size: 14px;
 }
 
+.todo-card .icon:hover {
+  cursor: pointer;
+}
+
 
 .todo-card .icon-done {
-  color: black;
+  color: green;
+}
+
+.todo-card .icon-done:hover {
+  color: green;
+  cursor: pointer;
 }
 
 .todo-card .text-done {
-  color: black;
+  color: green;
 }
 
 .todo-card .icon {
   font-size: 22px;
-  margin-left: 0%;
-}
-
-.todo-card .icon {
-  font-size: 22px;
-  margin-left: 0%;
 }
 
 .text-done {
@@ -72,5 +75,16 @@ body {
   font-size: 22px;
   color: #c23616;
 }
+
+
+.todo-card:hover .delete-icon {
+  color: red;
+  cursor: pointer;
+}
+
+
+
+
+
 
 
