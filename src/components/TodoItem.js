@@ -10,6 +10,8 @@ const TodoItem = () => {
   const [todoItem, setTodoItem] = useState('');
   const [error, setError] = useState(false);
   const [completedTasks, setCompletedTasks] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editingValue, setEditingValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +42,7 @@ const TodoItem = () => {
       if (todo.id === id) {
         todo.complete = !todo.complete;
       }
-      return setTodos([...todos]);
+      return setTodos(sortTodos([...todos]));
     });
   };
 
@@ -50,6 +52,27 @@ const TodoItem = () => {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setTodos(items);
+  };
+
+  const sortTodos = (todos) => {
+    return todos.sort((a, b) => a.complete - b.complete);
+  };
+
+  const toggleEdit = (id, currentValue) => {
+    setEditingId(id);
+    setEditingValue(currentValue);
+  };
+
+
+  const saveEdit = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.todo = editingValue;
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+    setEditingId(null);
   };
 
   useEffect(() => {
@@ -85,8 +108,8 @@ const TodoItem = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              value={todoItem}
-              className={error ? 'error' : ''}
+              value={todoItem} 
+			  className={error ? 'error' : ''}
               onChange={(e) => setTodoItem(e.target.value)}
               placeholder="Ecrire une tâche"
             />
@@ -100,41 +123,68 @@ const TodoItem = () => {
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {todos.map((todoItem, index) => {
                   const { id, todo, complete } = todoItem;
+                  const isEditing = editingId === id;
+
                   return (
-							<Draggable key={id} draggableId={id} index={index}>
-							{(provided) => (
-								<div ref={provided.innerRef}
-									{...provided.draggableProps}
-									{...provided.dragHandleProps}
-									className="todo-card">
-													
-									<div className="icon" 
-										onClick={() => toggleComplete(id)} >
-										{!complete ? (
-										<MdCheckBoxOutlineBlank />
-										) : (
-										<MdCheckBox className={complete ? 'icon-done' : ''}/>
-										)}
-									</div>
-									<p className={`text-left ${ complete ? 'text-done' : ''
-										}`} > {todo}
-									</p>
-									<TiDelete onClick={() => deleteTodo(id)}
-									className="icon delete-icon" />
-								</div>
-							)}
-							</Draggable>
-						);
-							})}
-							{provided.placeholder}
-							</div>
-							)}
-								</Droppable>
-							  </DragDropContext>
-							</div>
-						  </div>
-						);
-					  };
-					  
-					  export default TodoItem;
-					  
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="todo-card"
+                        >
+                          <div
+                            className="icon"
+                            onClick={() => toggleComplete(id)}
+                          >
+                            {!complete ? (
+                              <MdCheckBoxOutlineBlank />
+                            ) : (
+                              <MdCheckBox
+                                className={complete ? 'icon-done' : ''}
+                              />
+                            )}
+                          </div>
+                          {!isEditing ? (
+                            <p
+                              className={`text-left ${
+                                complete ? 'text-done' : ''
+                              }`}
+                              onClick={() => toggleEdit(id, todo)}
+                            >
+                              {todo}
+                            </p>
+                          ) : (
+                            <input
+                              type="text"
+                              value={editingValue}
+                              className="edit-input"
+                              onChange={(e) => setEditingValue(e.target.value)}
+                              onKeyDown={(e) =>
+                                e.key === 'Enter' && saveEdit(id)
+                              }
+                              onBlur={() => saveEdit(id)}
+                            />
+                          )}
+                          <TiDelete
+                            onClick={() => deleteTodo(id)}
+                            className="icon delete-icon"
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
+    </div>
+  );
+};
+
+export default TodoItem;
+

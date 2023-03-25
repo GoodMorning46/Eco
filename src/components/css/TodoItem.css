@@ -42,12 +42,15 @@ body {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   height: 10%;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .todo-card .icon:hover {
   cursor: pointer;
 }
-
 
 .todo-card .icon-done {
   color: green;
@@ -76,15 +79,49 @@ body {
   color: #c23616;
 }
 
-
 .todo-card:hover .delete-icon {
   color: red;
   cursor: pointer;
 }
 
+.edit-icon {
+  font-size: 22px;
+  color: #0984e3;
+  margin-left: 10px;
+}
 
+.todo-card:hover .edit-icon {
+  color: #74b9ff;
+  cursor: pointer;
+}
 
+.edit-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
 
+.incompleted_task {
+  margin-top: 5%;
+  color: gray;
+}
 
+.completed_task {
+  margin-top: 10%;
+  color: gray;
+}
 
+.text-left {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.text-left:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
