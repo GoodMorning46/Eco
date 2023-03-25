@@ -153,7 +153,8 @@ const TodoItem = () => {
                               }`}
                               onClick={() => toggleEdit(id, todo)}
                             >
-                              {todo}
+                                <span>{todo}</span>
+
                             </p>
                           ) : (
                             <input

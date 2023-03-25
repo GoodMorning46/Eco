@@ -48,6 +48,12 @@ body {
   padding: 10px;
 }
 
+.todo-card p.text-left {
+  flex-grow: 1;
+  margin: 0;
+  margin-left: 20px;
+}
+
 .todo-card .icon:hover {
   cursor: pointer;
 }
@@ -84,11 +90,6 @@ body {
   cursor: pointer;
 }
 
-.edit-icon {
-  font-size: 22px;
-  color: #0984e3;
-  margin-left: 10px;
-}
 
 .todo-card:hover .edit-icon {
   color: #74b9ff;
@@ -105,23 +106,20 @@ body {
   outline: none;
 }
 
-.incompleted_task {
-  margin-top: 5%;
-  color: gray;
-}
-
-.completed_task {
-  margin-top: 10%;
-  color: gray;
-}
 
 .text-left {
   cursor: pointer;
+}
+
+.text-left span {
+  display: inline-block;
   transition: background-color 0.3s ease;
 }
 
-.text-left:hover {
+.text-left span:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 2px 5px;
 }
+
+
