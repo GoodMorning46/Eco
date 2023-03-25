@@ -33,3 +33,35 @@
   .title_notes {
     font-size: 18px;
   }
+
+
+  .done-container {
+    margin-top: 50px;
+  }
+  
+  .done-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .done-card {
+    background-color: rgba(150, 150, 150, 0.5);
+    color: white;
+  }
+  
+  .done-card .delete-icon {
+    color: white;
+  }
+  
+  .done-card:hover .delete-icon {
+    color: #c23616;
+    cursor: pointer;
+  }
+  
+  .done-card .icon {
+    display: none;
+  }
+  
