@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import "./css/Notes.css"
+import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // importez le CSS de Quill
+import "./css/Notes.css";
 
 export default function App() {
-    const localNotes = localStorage.getItem("notes");
-    const [notes, setNotes] = useState(localNotes);
-  
-    const handleChange = e => {
-      localStorage.setItem("notes", e.target.value);
-      setNotes(e.target.value);
-    };
-  
-    return (
-      <form>
-        <label for="pad">
-            <textarea
-                rows="10"
-                placeholder="Ajouter une note"
-                name="pad"
-                value={notes}
-                onChange={handleChange}
-            />
-        </label>
-      </form>
-    );
-  }
+  const localNotes = localStorage.getItem("notes");
+  const [notes, setNotes] = useState(localNotes);
+
+  useEffect(() => {
+    if (!localNotes) {
+      localStorage.setItem("notes", "");
+    }
+  }, [localNotes]);
+
+  const handleChange = (value) => {
+    localStorage.setItem("notes", value);
+    setNotes(value);
+  };
+
+  return (
+    <div className="notes-container">
+      <ReactQuill value={notes} onChange={handleChange} />
+    </div>
+  );
+}
