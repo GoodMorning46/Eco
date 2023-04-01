@@ -9,9 +9,6 @@ function App() {
 
 	return(
 			<div className="container_parent">
-				<div className="header">
-					<img className='logo' src='logo.png'></img>
-				</div>
 				<div className="container_all">
 				
 						<div className="container_todo">
@@ -20,7 +17,6 @@ function App() {
 						</div>
 			
 						<div className="container_notes">
-							<h1 className="title_notes">NOTES</h1>
 							<Notes />
 						</div>
 				</div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/TodoItem.css';
 import { MdCheckBox } from 'react-icons/md';
 import { TiDelete } from 'react-icons/ti';
-import { MdCheckBoxOutlineBlank } from 'react-icons/md';
+import { MdOutlineRadioButtonUnchecked } from 'react-icons/md';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const TodoItem = () => {
@@ -139,7 +139,7 @@ const TodoItem = () => {
                             onClick={() => toggleComplete(id)}
                           >
                             {!complete ? (
-                              <MdCheckBoxOutlineBlank />
+                              <MdOutlineRadioButtonUnchecked />
                             ) : (
                               <MdCheckBox
                                 className={complete ? 'icon-done' : ''}

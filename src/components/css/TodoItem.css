@@ -37,7 +37,7 @@ body {
 }
 
 .todo-card {
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: rgba(250, 250, 250, 1);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   height: 10%;
