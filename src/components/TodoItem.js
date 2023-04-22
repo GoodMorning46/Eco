@@ -5,9 +5,8 @@ import { TiDelete } from 'react-icons/ti';
 import { MdOutlineRadioButtonUnchecked } from 'react-icons/md';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const TodoItem = ({ todos, setTodos }) => {
+const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
   const [completedTasks, setCompletedTasks] = useState('');
-  const [editingId, setEditingId] = useState(null);
   const [editingValue, setEditingValue] = useState('');
 
   const deleteTodo = (id) => {
@@ -85,10 +84,7 @@ const TodoItem = ({ todos, setTodos }) => {
                           {...provided.dragHandleProps}
                           className="todo-card"
                         >
-                          <div
-                            className="icon"
-                            onClick={() => toggleComplete(id)}
-                          >
+                          <div className="icon" onClick={() => toggleComplete(id)}>
                             {!complete ? (
                               <MdOutlineRadioButtonUnchecked />
                             ) : (
@@ -99,12 +95,10 @@ const TodoItem = ({ todos, setTodos }) => {
                           </div>
                           {!isEditing ? (
                             <p
-                              className={`text-left ${
-                                complete ? 'text-done' : ''
-                              }`}
+                              className={`text-left ${complete ? 'text-done' : ''}`}
                               onClick={() => toggleEdit(id, todo)}
                             >
-                                                            <span>{todo}</span>
+                              <span>{todo}</span>
                             </p>
                           ) : (
                             <input
@@ -112,10 +106,9 @@ const TodoItem = ({ todos, setTodos }) => {
                               value={editingValue}
                               className="edit-input"
                               onChange={(e) => setEditingValue(e.target.value)}
-                              onKeyDown={(e) =>
-                                e.key === 'Enter' && saveEdit(id)
-                              }
+                              onKeyDown={(e) => e.key === 'Enter' && saveEdit(id)}
                               onBlur={() => saveEdit(id)}
+                              autoFocus // Ajoutez cette ligne
                             />
                           )}
                           <TiDelete
