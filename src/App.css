@@ -1,50 +1,74 @@
-
 .container_all {
-    display: flex;
-    padding: 2%;
-  }
-  
-  .container_notes {
-    width: 60%;
-    margin-left: 8%;
-  }
+  display: flex;
+  padding: 2%;
+  background-color: #F3F7FB;
+}
 
-  .container_todo {
-    width: 40%;
-    margin-top: 2%;
-  }
+.container_notes {
+  width: 65%;
+  margin-left: 3%;
+}
 
-  .title_todo {
-    font-size: 18px;
-  }
+.container_todo {
+  width: 35%;
+}
 
-  .done-container {
-    margin-top: 50px;
-  }
-  
-  .done-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  
-  .done-card {
-    background-color: rgba(150, 150, 150, 0.5);
-    color: white;
-  }
-  
-  .done-card .delete-icon {
-    color: white;
-  }
-  
-  .done-card:hover .delete-icon {
-    color: #c23616;
-    cursor: pointer;
-  }
-  
-  .done-card .icon {
-    display: none;
-  }
-  
+.title_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title_todo {
+  font-size: 20px;
+  margin-top: 5%;
+}
+
+.title_notes {
+  font-size: 20px;
+  margin-top: 3%;
+}
+
+
+.done-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.done-card {
+  background-color: rgba(150, 150, 150, 0.5);
+  color: white;
+}
+
+.done-card .delete-icon {
+  color: white;
+}
+
+.done-card:hover .delete-icon {
+  color: #c23616;
+  cursor: pointer;
+}
+
+.done-card .icon {
+  display: none;
+}
+
+.button-todo {
+  margin-top: 5%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 4%;
+}
+
+.cont-notes {
+  margin-top: 2%;
+}
+
+/* Centrer le bouton */
+.button {
+  display: flex;
+  justify-content: center;
+}

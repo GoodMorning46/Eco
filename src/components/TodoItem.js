@@ -1,36 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './css/TodoItem.css';
-import { MdCheckBox } from 'react-icons/md';
+import { RiCheckboxCircleFill } from 'react-icons/ri';
 import { TiDelete } from 'react-icons/ti';
 import { MdOutlineRadioButtonUnchecked } from 'react-icons/md';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const TodoItem = () => {
-  const [todos, setTodos] = useState([]);
-  const [todoItem, setTodoItem] = useState('');
-  const [error, setError] = useState(false);
+const TodoItem = ({ todos, setTodos }) => {
   const [completedTasks, setCompletedTasks] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editingValue, setEditingValue] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (todoItem) {
-      setError(false);
-      let uniqueId =
-        new Date().getTime().toString(36) + new Date().getUTCMilliseconds();
-      let newTodoItem = {
-        id: uniqueId,
-        todo: todoItem,
-        complete: false,
-      };
-      setTodos([newTodoItem, ...todos]);
-      setTodoItem('');
-    } else {
-      setError(true);
-      setTodoItem('');
-    }
-  };
 
   const deleteTodo = (id) => {
     let newTodos = todos.filter((todo) => todo.id !== id);
@@ -38,31 +16,20 @@ const TodoItem = () => {
   };
 
   const toggleComplete = (id) => {
-    todos.find((todo) => {
+    let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        todo.complete = !todo.complete;
+        return { ...todo, complete: !todo.complete };
+      } else {
+        return todo;
       }
-      return setTodos(sortTodos([...todos]));
     });
-  };
-
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const items = Array.from(todos);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setTodos(items);
-  };
-
-  const sortTodos = (todos) => {
-    return todos.sort((a, b) => a.complete - b.complete);
+    setTodos(updatedTodos);
   };
 
   const toggleEdit = (id, currentValue) => {
     setEditingId(id);
     setEditingValue(currentValue);
   };
-
 
   const saveEdit = (id) => {
     const updatedTodos = todos.map((todo) => {
@@ -75,11 +42,13 @@ const TodoItem = () => {
     setEditingId(null);
   };
 
-  useEffect(() => {
-    let completeArray = [];
-    todos.filter((todo) => todo.complete === true && completeArray.push(todo));
-    setCompletedTasks(completeArray.length);
-  }, [todos]);
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(todos);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setTodos(items);
+  };
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos'));
@@ -89,15 +58,6 @@ const TodoItem = () => {
   }, []);
 
   useEffect(() => {
-    let adderror = setTimeout(() => {
-      setError(false);
-    }, 2000);
-    return () => {
-      clearTimeout(adderror);
-    };
-  }, [error]);
-
-  useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
@@ -105,15 +65,6 @@ const TodoItem = () => {
     <div className="app-container">
       <div className="header-section">
         <div className="app-form-container">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={todoItem} 
-			  className={error ? 'error' : ''}
-              onChange={(e) => setTodoItem(e.target.value)}
-              placeholder="Ecrire une tâche"
-            />
-          </form>
         </div>
       </div>
       <div className="todo-container">
@@ -141,7 +92,7 @@ const TodoItem = () => {
                             {!complete ? (
                               <MdOutlineRadioButtonUnchecked />
                             ) : (
-                              <MdCheckBox
+                              <RiCheckboxCircleFill
                                 className={complete ? 'icon-done' : ''}
                               />
                             )}
@@ -153,8 +104,7 @@ const TodoItem = () => {
                               }`}
                               onClick={() => toggleEdit(id, todo)}
                             >
-                                <span>{todo}</span>
-
+                                                            <span>{todo}</span>
                             </p>
                           ) : (
                             <input
@@ -188,4 +138,3 @@ const TodoItem = () => {
 };
 
 export default TodoItem;
-

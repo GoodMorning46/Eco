@@ -1,0 +1,19 @@
+.button_add {
+    width: 250px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .button_add:hover {
+    background-color: #0069d9;
+  }
+  
