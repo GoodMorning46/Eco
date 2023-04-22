@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './css/TodoItem.css';
-import { RiCheckboxCircleFill } from 'react-icons/ri';
+import { RiCheckboxFill } from 'react-icons/ri';
 import { TiDelete } from 'react-icons/ti';
-import { MdOutlineRadioButtonUnchecked } from 'react-icons/md';
+import { RiCheckboxBlankLine } from 'react-icons/ri';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
@@ -49,6 +49,17 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
     setTodos(items);
   };
 
+  const togglePriority = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, priority: !todo.priority };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos'));
     if (todos) {
@@ -84,37 +95,50 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
                           {...provided.dragHandleProps}
                           className="todo-card"
                         >
-                          <div className="icon" onClick={() => toggleComplete(id)}>
-                            {!complete ? (
-                              <MdOutlineRadioButtonUnchecked />
+                          <div className="top-section">
+                            <div
+                              className="icon"
+                              onClick={() => toggleComplete(id)}
+                            >
+                              {!complete ? (
+                                <RiCheckboxBlankLine />
+                              ) : (
+                                <RiCheckboxFill
+                                  className={complete ? 'icon-done' : ''}
+                                />
+                              )}
+                            </div>
+                            {!isEditing ? (
+                              <p
+                                className={`text-left ${complete ? 'text-done' : ''}`}
+                                onClick={() => toggleEdit(id, todo)}
+                              >
+                                <span>{todo}</span>
+                              </p>
                             ) : (
-                              <RiCheckboxCircleFill
-                                className={complete ? 'icon-done' : ''}
+                              <input
+                                type="text"
+                                value={editingValue}
+                                className="edit-input"
+                                onChange={(e) => setEditingValue(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && saveEdit(id)}
+                                onBlur={() => saveEdit(id)}
+                                autoFocus
                               />
                             )}
-                          </div>
-                          {!isEditing ? (
-                            <p
-                              className={`text-left ${complete ? 'text-done' : ''}`}
-                              onClick={() => toggleEdit(id, todo)}
-                            >
-                              <span>{todo}</span>
-                            </p>
-                          ) : (
-                            <input
-                              type="text"
-                              value={editingValue}
-                              className="edit-input"
-                              onChange={(e) => setEditingValue(e.target.value)}
-                              onKeyDown={(e) => e.key === 'Enter' && saveEdit(id)}
-                              onBlur={() => saveEdit(id)}
-                              autoFocus // Ajoutez cette ligne
+                            <TiDelete
+                              onClick={() => deleteTodo(id)}
+                              className="icon delete-icon"
                             />
-                          )}
-                          <TiDelete
-                            onClick={() => deleteTodo(id)}
-                            className="icon delete-icon"
-                          />
+                          </div>
+                          <div className="priority-container">
+                            <button
+                              className={`priority-btn ${todoItem.priority ? 'active' : ''}`}
+                              onClick={() => togglePriority(id)}
+                            >
+                              Prioritaire
+                            </button>
+                          </div>
                         </div>
                       )}
                     </Draggable>
