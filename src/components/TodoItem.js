@@ -56,8 +56,27 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
       }
       return todo;
     });
+  
+    // Trier les tâches en fonction de leur priorité et de leur état d'achèvement
+    updatedTodos.sort((a, b) => {
+      if (a.priority && !b.priority) {
+        return -1;
+      }
+      if (!a.priority && b.priority) {
+        return 1;
+      }
+      if (a.complete && !b.complete) {
+        return 1;
+      }
+      if (!a.complete && b.complete) {
+        return -1;
+      }
+      return 0;
+    });
+  
     setTodos(updatedTodos);
   };
+  
 
 
   useEffect(() => {
@@ -93,7 +112,7 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="todo-card"
+                          className={`todo-card move-transition`}
                         >
                           <div className="top-section">
                             <div
@@ -132,12 +151,13 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
                             />
                           </div>
                           <div className="priority-container">
-                            <button
-                              className={`priority-btn ${todoItem.priority ? 'active' : ''}`}
-                              onClick={() => togglePriority(id)}
-                            >
-                              Prioritaire
-                            </button>
+                          <button
+  className={`priority-btn ${todoItem.priority ? 'active' : ''} ${todoItem.complete ? 'disabled' : ''}`}
+  onClick={() => togglePriority(id)}
+>
+  Prioritaire
+</button>
+
                           </div>
                         </div>
                       )}

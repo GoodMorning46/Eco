@@ -11,7 +11,6 @@ body {
   box-shadow: none;
   border-radius: 2px;
   padding: 0%;
-  margin-top: 4%;
 }
 
 
@@ -35,8 +34,7 @@ body {
   height: 100px;
   font-size: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column; /* Ajoutez cette ligne pour changer la direction des éléments */
   padding: 10px;
 }
 
@@ -45,18 +43,21 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex-grow: 1;
+  margin-bottom: 50px; /* Ajoutez cette ligne pour remonter la section supérieure */
 }
+
 
 .todo-card .icon,
 .todo-card p {
-  margin-top: 10px;
   margin-bottom: 0;
+  margin-top: 5px;
 }
 
 .todo-card p.text-left {
   flex-grow: 1;
   margin: 0;
-  margin-left: 20px;
+  margin-left: 8px;
 }
 
 .todo-card .icon:hover {
@@ -139,12 +140,23 @@ body {
   background-color: #f5f5f5;
   border: none;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 0.9em;
   cursor: pointer;
   padding: 5px 10px;
 }
 
 .priority-btn.active {
-  background-color: #333;
+  background-color: #182946;
   color: #fff;
 }
+
+.priority-btn.disabled {
+  background-color: #ccc;
+  color: rgb(160, 157, 157);
+}
+
+.move-transition {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+
