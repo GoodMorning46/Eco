@@ -16,7 +16,6 @@
   font-size: 0.9em;
   margin-bottom: 60px;
   background-color: white;
-  border-radius: 10px;
 }
 
 /* Retirer la bordure autour de la zone de texte */
@@ -27,12 +26,13 @@
 /* Style de la barre d'outils */
 .ql-toolbar {
   border-radius: 10px;
-  width: 50%; /* Largeur ajustée */
-  margin: 10px auto; /* Marge pour centrer la barre d'outils et ajouter de l'espace en haut */
+  width: 100%; /* Largeur ajustée */
+  margin: 10px 0; /* Marge pour ajouter de l'espace en haut */
   position: static;
   padding: 5px 0; /* Espace autour des boutons */
   display: flex;
   justify-content: center; /* Centrer les boutons à l'intérieur de la barre d'outils */
+  background-color: #f8f9fa; /* Couleur d'arrière-plan de la barre d'outils */
 }
 
 /* Style des boutons de la barre d'outils */
@@ -40,7 +40,15 @@
   background-color: transparent;
   padding: 5px;
   cursor: pointer;
+  color: #495057; /* Couleur des icônes des boutons */
 }
+
+/* Style des boutons de la barre d'outils lorsqu'ils sont survolés */
+.ql-toolbar button:hover {
+  background-color: #f5f5f5;
+  color: #212529; /* Couleur des icônes des boutons lorsqu'ils sont survolés */
+}
+
 
 /* Style des boutons de la barre d'outils lorsqu'ils sont survolés */
 .ql-toolbar button:hover {
