@@ -23,6 +23,7 @@ const quill = new Quill('#editor', {
 export default function App() {
   const localNotes = localStorage.getItem("notes");
   const [notes, setNotes] = useState(localNotes);
+  const [showPlaceholder, setShowPlaceholder] = useState(!localNotes);
 
   useEffect(() => {
     if (!localNotes) {
@@ -33,11 +34,12 @@ export default function App() {
   const handleChange = (value) => {
     localStorage.setItem("notes", value);
     setNotes(value);
+    setShowPlaceholder(!value);
   };
 
   return (
     <div className="notes-container">
-      <ReactQuill value={notes} onChange={handleChange} modules={{ toolbar: toolbarOptions }} />
+      <ReactQuill value={notes} onChange={handleChange} modules={{ toolbar: toolbarOptions }}/>
     </div>
   );
 }

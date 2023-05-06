@@ -128,29 +128,10 @@ body {
   padding: 2px 5px;
 }
 
-.priority-container {
+.button-container {
   position: absolute;
   bottom: 10px;
   left: 10px;
-}
-
-.priority-btn {
-  background-color: #f5f5f5;
-  border: none;
-  border-radius: 5px;
-  font-size: 0.9em;
-  cursor: pointer;
-  padding: 5px 10px;
-}
-
-.priority-btn.active {
-  background-color: #182946;
-  color: #fff;
-}
-
-.priority-btn.disabled {
-  background-color: #ccc;
-  color: rgb(160, 157, 157);
 }
 
 .move-transition {
@@ -158,3 +139,39 @@ body {
 }
 
 
+.start-btn {
+  margin-left: 10px;
+  padding: 3px 6px;
+  border: 1px solid #0099ff;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #0099ff;
+}
+
+.start-btn.running {
+  background-color: #0099ff;
+  color: #ffffff;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.start-btn {
+  cursor: pointer;
+}
+
+  

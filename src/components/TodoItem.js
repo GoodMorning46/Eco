@@ -6,7 +6,6 @@ import { RiCheckboxBlankLine } from 'react-icons/ri';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
-  const [completedTasks, setCompletedTasks] = useState('');
   const [editingValue, setEditingValue] = useState('');
 
   const deleteTodo = (id) => {
@@ -49,35 +48,18 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
     setTodos(items);
   };
 
-  const togglePriority = (id) => {
+  const toggleRunning = (id) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return { ...todo, priority: !todo.priority };
+        return { ...todo, isRunning: !todo.isRunning, complete: todo.isRunning };
       }
       return todo;
     });
-  
-    // Trier les tâches en fonction de leur priorité et de leur état d'achèvement
-    updatedTodos.sort((a, b) => {
-      if (a.priority && !b.priority) {
-        return -1;
-      }
-      if (!a.priority && b.priority) {
-        return 1;
-      }
-      if (a.complete && !b.complete) {
-        return 1;
-      }
-      if (!a.complete && b.complete) {
-        return -1;
-      }
-      return 0;
-    });
-  
+
     setTodos(updatedTodos);
+
   };
   
-
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos'));
@@ -107,7 +89,7 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
 
                   return (
                     <Draggable key={id} draggableId={id} index={index}>
-                      {(provided) => (
+                                            {(provided) => (
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
@@ -150,14 +132,20 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
                               className="icon delete-icon"
                             />
                           </div>
-                          <div className="priority-container">
-                          <button
-  className={`priority-btn ${todoItem.priority ? 'active' : ''} ${todoItem.complete ? 'disabled' : ''}`}
-  onClick={() => togglePriority(id)}
->
-  Prioritaire
-</button>
-
+                          <div className="button-container">
+                          {!todoItem.complete && (
+                            <button
+                              className={`start-btn ${todoItem.isRunning ? 'running' : ''} cursor-pointer`}
+                              onClick={() => toggleRunning(todoItem.id)}
+                            >
+                              {todoItem.isRunning ? (
+                                <>
+                                  <span className="spinner"></span> En cours
+                                </>
+                              ) : (
+                                'Démarrer'
+                              )}
+                            </button>)}
                           </div>
                         </div>
                       )}
@@ -175,3 +163,5 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
 };
 
 export default TodoItem;
+
+                     
