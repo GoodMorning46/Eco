@@ -20,7 +20,7 @@ body {
 }
 
 .todo-container {
-  height: 560px;
+  height: 585px;
   overflow: scroll;
   padding: 0%;
 }
@@ -127,8 +127,6 @@ body {
   border-radius: 4px;
   padding: 2px 5px;
 }
-
-
 
 .priority-container {
   position: absolute;
