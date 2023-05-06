@@ -51,13 +51,15 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
   const toggleRunning = (id) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return { ...todo, isRunning: !todo.isRunning, complete: todo.isRunning };
+        return {
+          ...todo,
+          isRunning: !todo.isRunning,
+          isCompleted: todo.isRunning,
+        };
       }
       return todo;
     });
-
     setTodos(updatedTodos);
-
   };
   
 
@@ -133,19 +135,26 @@ const TodoItem = ({ todos, setTodos, editingId, setEditingId }) => {
                             />
                           </div>
                           <div className="button-container">
-                          {!todoItem.complete && (
-                            <button
-                              className={`start-btn ${todoItem.isRunning ? 'running' : ''} cursor-pointer`}
-                              onClick={() => toggleRunning(todoItem.id)}
-                            >
-                              {todoItem.isRunning ? (
-                                <>
-                                  <span className="spinner"></span> En cours
-                                </>
-                              ) : (
-                                'Démarrer'
-                              )}
-                            </button>)}
+                            {!todoItem.complete && (
+                              <button
+                                className={`start-btn ${
+                                  todoItem.isRunning ? "running" : ""
+                                } cursor-pointer`}
+                                onClick={() => toggleRunning(todoItem.id)}
+                              >
+                                {!todoItem.isCompleted ? (
+                                  todoItem.isRunning ? (
+                                    <>
+                                      <span className="spinner"></span> En cours
+                                    </>
+                                  ) : (
+                                    "Démarrer"
+                                  )
+                                ) : (
+                                  "Démarrer"
+                                )}
+                              </button>
+                            )}
                           </div>
                         </div>
                       )}
