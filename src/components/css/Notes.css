@@ -2,10 +2,11 @@
   width: 100%;
   margin: 0 auto;
   background-color: #ffffff;
-  height: 650px;
+  height: 800px;
   border-radius: 10px;
   position: relative;
   margin-left: 0%;
+  padding: 3%;
 }
 
 /* Style du conteneur de l'éditeur */
@@ -14,8 +15,10 @@
   height: 620px;
   padding: 1%;
   font-size: 0.9em;
-  margin-bottom: 60px;
+  margin-bottom: 80px; /* Augmentez la marge pour laisser de l'espace pour la barre d'outils */
   background-color: white;
+  position: relative;
+  padding-bottom: 60px; /* Augmentez le padding pour éviter que le texte ne soit caché par la barre d'outils */
 }
 
 /* Retirer la bordure autour de la zone de texte */
@@ -26,13 +29,18 @@
 /* Style de la barre d'outils */
 .ql-toolbar {
   border-radius: 10px;
-  width: 100%; /* Largeur ajustée */
-  margin: 10px 0; /* Marge pour ajouter de l'espace en haut */
-  position: static;
-  padding: 5px 0; /* Espace autour des boutons */
+  width: 55%; /* Réduisez la largeur à 80% pour la rétrécir */
+  height: 40px; /* Ajoutez une hauteur fixe pour la rétrécir */
+  margin: 10px auto; /* Changez la marge pour centrer la barre d'outils et ajouter de l'espace en dessous */
+  position: absolute;
+  bottom: 50px; /* Placez la barre d'outils un peu en dehors du conteneur pour un effet "flottant" */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 0;
   display: flex;
-  justify-content: center; /* Centrer les boutons à l'intérieur de la barre d'outils */
-  background-color: #f8f9fa; /* Couleur d'arrière-plan de la barre d'outils */
+  justify-content: center;
+  background-color: #f8f9fa;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre portée pour un effet "flottant" */
 }
 
 /* Style des boutons de la barre d'outils */

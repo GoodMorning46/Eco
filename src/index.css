@@ -76,12 +76,6 @@
   font-size: 18px;
 }
 
-.todo-container{
-  margin: 10px 0;
-  height: 55vh;
-  overflow: scroll;
-  padding: 20px;
-}
 
 .todo-card{
   display: flex;

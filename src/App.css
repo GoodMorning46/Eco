@@ -1,22 +1,16 @@
 .container_all {
   display: flex;
   background-color: #F3F7FB;
-  height: 900px
+  height: 796px
 }
 
 .container_notes {
-  width: 60%;
-  margin-top: 2%;
-  margin-left: 3%;
+  width: 65%;
 }
 
 .container_todo {
   width: 35%;
-  margin-left: 2%;
-  margin-top: 3.5%;
-  margin-right: 2%;
 }
-
 
 .title_container {
   display: flex;
@@ -51,18 +45,38 @@
 }
 
 .button-todo {
-  margin-top: 5%;
   background-color: white;
-  border-radius: 10px;
   padding: 4%;
+  height: 800px;
+  border-left : 0.5px solid grey
 }
 
-.cont-notes {
-  margin-top: 2%;
-}
 
 /* Centrer le bouton */
 .button {
   display: flex;
   justify-content: center;
+}
+
+/* Style pour le conteneur du titre et du bouton */
+.todo-header {
+  display: flex; /* Organise les éléments en ligne */
+  align-items: center; /* Aligne verticalement les éléments au centre */
+  justify-content: space-between; /* Distribue l'espace entre les éléments */
+}
+
+/* Style pour le titre "Tâche en cours" */
+.todo-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 20px; /* Ajoute de l'espace à droite du titre */
+}
+
+.line {
+  width: 100%; /* Réduit la largeur du conteneur à 80% de sa largeur maximale */
+  margin: auto; /* Centrer le conteneur */
+  border-bottom: 1px solid black; /* Ajoute une bordure inférieure */
+  margin-top: 20px; /* Ajoute de l'espace en haut de la ligne */
+  margin-bottom: 20px; /* Ajoute de l'espace en bas de la ligne */
 }
