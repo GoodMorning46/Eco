@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
-import Quill from 'quill';
-import "react-quill/dist/quill.snow.css"; // importez le CSS de Quill
+import "react-quill/dist/quill.snow.css";
 import "./css/Notes.css";
 
 const toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'align': [] }],
-  ['bold', 'italic', 'underline', 'strike'], // Les options de base sont déjà là
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }], // Listes
-  [{ 'color': [] }, { 'background': [] }], // Couleurs
-  ['link', 'image'], // Liens, images et vidéos
+  ['bold', 'italic', 'underline', 'strike'],
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'color': [] }, { 'background': [] }],
+  ['link', 'image'],
 ];
 
-const quill = new Quill('#editor', {
-  modules: {
-    toolbar: toolbarOptions,
-  },
-  theme: 'snow',
-});
-
-export default function App() {
-  const localNotes = localStorage.getItem("notes");
-  const [notes, setNotes] = useState(localNotes);
-  const [showPlaceholder, setShowPlaceholder] = useState(!localNotes);
+const Notes = () => {
+  let quillInstance = null;
 
   useEffect(() => {
-    if (!localNotes) {
-      localStorage.setItem("notes", "");
+    quillInstance = new ReactQuill.Quill('#editor', {
+      modules: {
+        toolbar: toolbarOptions,
+      },
+      theme: 'snow',
+    });
+    
+    const localNotes = localStorage.getItem("notes");
+    
+    if (localNotes) {
+        try {
+            const parsedNotes = JSON.parse(localNotes);
+            quillInstance.setContents(parsedNotes);
+            const firstLineFormat = quillInstance.getFormat(0);
+            if (firstLineFormat.header !== 2) {
+                quillInstance.formatLine(0, 1, 'header', 2);
+            }
+        } catch(e) {
+            console.error('Error parsing localNotes JSON: ', e);
+        }
+    } else {
+        quillInstance.insertText(0, '\n', 'header', 2);
     }
-  }, [localNotes]);
 
-  const handleChange = (value) => {
-    localStorage.setItem("notes", value);
-    setNotes(value);
-    setShowPlaceholder(!value);
-  };
+    quillInstance.on('text-change', function() {
+      const contents = quillInstance.getContents();
+      localStorage.setItem("notes", JSON.stringify(contents));
+    });
+
+  }, []);
 
   return (
     <div className="notes-container">
-      <ReactQuill value={notes} onChange={handleChange} modules={{ toolbar: toolbarOptions }}/>
+      <div id="editor"></div>
+      <div className="chevrons">>></div>
     </div>
   );
 }
+
+export default Notes;
