@@ -33,7 +33,7 @@ function App() {
           <div className="title_container"></div>
           <div className="button-todo">
   <div className="todo-header"> {/* Ajout de cette div pour englober le titre et le bouton */}
-    <h2 className="todo-title">Tâche </h2> 
+    <h2 className="todo-title">To-do </h2> 
     <div className="button">
       <Button onClick={handleAddTaskButtonClick} Icon={FiPlus} />
     </div>
